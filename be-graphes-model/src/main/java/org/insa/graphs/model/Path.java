@@ -198,11 +198,33 @@ public class Path {
      * 
      * @return true if the path is valid, false otherwise.
      * 
-     * @deprecated Need to be implemented.
+     *  Need to be implemented.
      */
     public boolean isValid() {
         // TODO:
-        return false;
+    	boolean Test = false;
+    	if (this.isEmpty() | this.size()==1 ){
+    		Test = true;
+    		System.out.println("oui");
+    		}
+    	else if  (this.getArcs().get(0).getOrigin()==this.getOrigin()){
+    		
+    		Test = true;
+    		
+    		
+    		for(int i = 0;i < (this.size()-2);i++){ 
+        	  if (this.getArcs().get(i).getDestination() == this.getArcs().get(i+1).getOrigin()){
+        		  Test = Test & true ;
+        			  
+    		}
+        	  else {
+        		  Test = Test & false ;
+    		}
+    	}
+    	}
+  
+    	
+        return Test;
     }
 
     /**
@@ -210,11 +232,16 @@ public class Path {
      * 
      * @return Total length of the path (in meters).
      * 
-     * @deprecated Need to be implemented.
+     *  Need to be implemented.
      */
     public float getLength() {
+    	
         // TODO:
-        return 0;
+    	float L = 0;
+    	for(Arc arc : arcs){
+    		L += arc.getLength();
+    	}
+        return L;
     }
 
     /**
@@ -225,11 +252,17 @@ public class Path {
      * @return Time (in seconds) required to travel this path at the given speed (in
      *         kilometers-per-hour).
      * 
-     * @deprecated Need to be implemented.
+     * Need to be implemented.
      */
     public double getTravelTime(double speed) {
         // TODO:
-        return 0;
+    	float S = 0;
+    	for(Arc arc : arcs){
+    		S += arc.getTravelTime(speed);
+    	}
+    	;
+    	
+        return S;
     }
 
     /**
@@ -238,11 +271,15 @@ public class Path {
      * 
      * @return Minimum travel time to travel this path (in seconds).
      * 
-     * @deprecated Need to be implemented.
+     *  Need to be implemented.
      */
     public double getMinimumTravelTime() {
         // TODO:
-        return 0;
+    	float L = 0;
+    	for(Arc arc : arcs){
+    		L += arc.getMinimumTravelTime();
+    	}
+        return L;
     }
 
 }
