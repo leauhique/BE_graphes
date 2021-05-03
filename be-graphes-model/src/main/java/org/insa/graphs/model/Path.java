@@ -37,6 +37,53 @@ public class Path {
         List<Arc> arcs = new ArrayList<Arc>();
         
         // TODO:
+      //List<Arc>  succesors = nodes.get(0).getSuccessors();
+        // TODO:
+        
+        
+        double C = 0;
+         if (nodes.size()==0) {
+        	 
+        	 return new Path(graph);
+         }
+         else if (nodes.size()==1) {
+        	
+        	 return new Path(graph,nodes.get(0));
+         }
+         
+        	 for (int i =0;i< nodes.size()-1;i++){
+             	
+             	double fastest = 100000;
+                int shortarc = 0;    
+             	// & nodes.get(i).getSuccessors().get(j).getDestination()==nodes.get(i+1)
+             	for(int j = 0; j < nodes.get(i).getNumberOfSuccessors() ;j++) {
+             		
+             		if(nodes.get(i).getSuccessors().get(j).getDestination()==nodes.get(i+1)) {
+             			
+             			
+                 		C = nodes.get(i).getSuccessors().get(j).getMinimumTravelTime();
+                 		if (C < fastest) {
+                 			fastest = C;
+                 			shortarc = j;
+                 		}
+             		}
+             		
+       
+             	}
+             	if ( fastest == 100000 ) {
+             		
+     	 			throw new IllegalArgumentException("pas de sucesseur");
+     	 			
+     	 		}
+             //	System.out.println(shortest);
+//             	System.out.println(nodes.get(i).getSuccessors().get(shortarc).getLength());
+             	arcs.add(nodes.get(i).getSuccessors().get(shortarc));
+             	
+             }
+         
+        
+       
+      
         
         return new Path(graph, arcs);
     }
@@ -61,27 +108,27 @@ public class Path {
         //List<Arc>  succesors = nodes.get(0).getSuccessors();
         // TODO:
         
-        System.out.println("début");
+        
         float C = 0;
          if (nodes.size()==0) {
-        	 System.out.println("size =0");
+        	 
         	 return new Path(graph);
          }
          else if (nodes.size()==1) {
-        	 System.out.println("size = 1");
+        	
         	 return new Path(graph,nodes.get(0));
          }
          
         	 for (int i =0;i< nodes.size()-1;i++){
-             	System.out.println("i="+i);
+             	
              	float shortest = 100000;
                 int shortarc = 0;    
              	// & nodes.get(i).getSuccessors().get(j).getDestination()==nodes.get(i+1)
              	for(int j = 0; j < nodes.get(i).getNumberOfSuccessors() ;j++) {
-             		System.out.println(shortest);
+             		
              		if(nodes.get(i).getSuccessors().get(j).getDestination()==nodes.get(i+1)) {
              			
-             			System.out.println("j="+j);
+             			
                  		C = nodes.get(i).getSuccessors().get(j).getLength();
                  		if (C < shortest) {
                  			shortest = C;
@@ -92,7 +139,7 @@ public class Path {
        
              	}
              	if ( shortest == 100000 ) {
-             		System.out.println("excpetion");
+             		
      	 			throw new IllegalArgumentException("pas de sucesseur");
      	 			
      	 		}
@@ -104,7 +151,7 @@ public class Path {
          
         
        
-        System.out.println("FIN");
+        
         return new Path(graph, arcs);
     }
 
